@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Snippet Vault — Save & Copy Snippets</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 24 24" aria-hidden><path fill="currentColor" d="M3 12a9 9 0 1118 0 9 9 0 01-18 0zm9-5l4 4h-3v5h-2v-5H8l4-4z"/></svg>
+      <span>Snippet Vault</span>
+    </div>
+
+    <div class="controls">
+      <input id="searchInput" placeholder="Search snippets..." aria-label="Search snippets">
+      <select id="filterLang" title="Filter by language">
+        <option value="">All languages</option>
+        <option value="html">HTML</option>
+        <option value="css">CSS</option>
+        <option value="js">JavaScript</option>
+        <option value="txt">Text</option>
+      </select>
+      <button id="themeBtn" title="Toggle theme">🌙</button>
+      <button id="addBtn" class="primary">+ New</button>
+    </div>
+  </header>
+
+  <main class="app">
+    <aside class="sidebar">
+      <h3>Your snippets</h3>
+      <ul id="snippetList" class="list"></ul>
+      <div class="empty" id="emptyState">No snippets yet — create one with <strong>New</strong>.</div>
+    </aside>
+
+    <section class="viewer">
+      <div id="viewerHeader" class="viewer-header">
+        <div>
+          <h2 id="viewerTitle">Select a snippet</h2>
+          <div id="viewerMeta" class="meta"></div>
+        </div>
+        <div class="viewer-actions">
+          <button id="copyBtn" title="Copy" disabled>Copy</button>
+          <button id="downloadBtn" title="Download" disabled>Download</button>
+          <button id="editBtn" title="Edit" disabled>Edit</button>
+          <button id="deleteBtn" title="Delete" class="danger" disabled>Delete</button>
+        </div>
+      </div>
+
+      <pre id="viewerPre" class="code-block" aria-live="polite"><code id="viewerCode"></code></pre>
+    </section>
+  </main>
+
+  <!-- Modal Editor -->
+  <div id="editorModal" class="modal hidden" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-panel">
+      <header class="modal-header">
+        <h3 id="modalTitle">New Snippet</h3>
+        <button id="closeModal" title="Close">✕</button>
+      </header>
+
+      <form id="snippetForm" class="modal-body">
+        <label>
+          Title
+          <input id="titleInput" required maxlength="80" placeholder="E.g. Fetch helper" />
+        </label>
+
+        <label>
+          Language
+          <select id="langInput" required>
+            <option value="js">JavaScript</option>
+            <option value="html">HTML</option>
+            <option value="css">CSS</option>
+            <option value="txt">Text</option>
+          </select>
+        </label>
+
+        <label>
+          Tags (comma separated)
+          <input id="tagsInput" placeholder="utilities,fetch,api" />
+        </label>
+
+        <label class="full">
+          Content
+          <textarea id="contentInput" required placeholder="// paste code or text here"></textarea>
+        </label>
+
+        <div class="modal-footer">
+          <button type="button" id="cancelBtn">Cancel</button>
+          <button type="submit" class="primary" id="saveBtn">Save Snippet</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
